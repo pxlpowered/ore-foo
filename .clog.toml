@@ -1,0 +1,6 @@
+[clog]
+changelog = "Changelog.md"
+link-style = "github"
+output-format = "markdown"
+repository = "https://github.com/pxlpowered/ore"
+subtitle = "Ore"

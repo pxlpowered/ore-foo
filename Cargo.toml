@@ -1,0 +1,56 @@
+[badges.appveyor]
+repository = "kinggoesgaming/ore"
+
+[badges.travis-ci]
+repository = "pxlpowered/ore"
+
+[dependencies]
+chrono = "0.4"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+
+[dependencies.futures]
+optional = true
+version = "0.1"
+
+[dependencies.hyper]
+optional = true
+version = "0.11"
+
+[dependencies.hyper-tls]
+optional = true
+version = "0.1"
+
+[dependencies.native-tls]
+optional = true
+version = "0.1"
+
+[dependencies.tokio-core]
+optional = true
+version = "0.1"
+
+[features]
+file_backend = []
+hyper-backend = ["futures", "hyper", "tokio-core"]
+hyper_tls_backend = ["futures", "hyper", "hyper-tls", "native-tls", "tokio-core"]
+ore_v1 = []
+
+[package]
+authors = ["Hunar Roop Kahlon <hunar.roop@gmail.com>"]
+categories = ["api-bindings"]
+description = "A library interacting with the Sponge Ore web API"
+documentation = "https://docs.rs/ore/0.1.0"
+exclude = ["appveyor.yml", "target", "version"]
+keywords = ["ore", "sponge", "minecraft"]
+license = "Apache-2.0/MIT"
+name = "ore"
+publish = false
+readme = "README.md"
+repository = "https://www.github.com/pxlpowered/ore"
+# NOTE:
+# * Change version in:
+#   * documentation field
+#   * lib.rs file
+#   * version file
+version = "0.1.0"

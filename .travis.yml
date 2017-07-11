@@ -1,0 +1,61 @@
+addons:
+  apt:
+    packages:
+      - gcc-multilib
+
+before_script:
+  - rustup target add $ALT
+
+cache: cargo
+
+dist: trusty
+
+git:
+  depth: 1
+
+language: rust
+
+matrix:
+  allow_failures:
+    - rust: nightly
+
+  exclude:
+    - rust: stable
+
+  include:
+    - env: TARGET=x86_64-unknown-linux-gnu
+           ALT=i686-unknown-linux-gnu
+    - env: TARGET=x86_64-apple-darwin
+           ALT=i686-apple-darwin
+      os: osx
+
+    - env: TARGET=x86_64-unknown-linux-gnu
+           ALT=i686-unknown-linux-gnu
+      rust: beta
+
+    - env: TARGET=x86_64-apple-darwin
+           ALT=i686-apple-darwin
+      os: osx
+      rust: beta
+
+    - env: TARGET=x86_64-unknown-linux-gnu
+           ALT=i686-unknown-linux-gnu
+      rust: nightly
+
+    - env: TARGET=x86_64-apple-darwin
+           ALT=i686-apple-darwin
+      os: osx
+      rust: nightly
+
+notifications:
+  email:
+    on_success: never
+
+rust: stable
+
+script:
+  - cargo build --verbose --all-features
+  - cargo test --verbose --all-features --jobs 4
+  - cargo doc --verbose --all-features
+
+sudo: required
