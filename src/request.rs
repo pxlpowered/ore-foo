@@ -15,7 +15,6 @@
 //! Provides the interfaces for request data from an Ore repository.
 
 use serde::Deserialize;
-use serde::de;
 use serde_json;
 use std::error;
 use std::fmt;
