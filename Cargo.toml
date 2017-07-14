@@ -31,8 +31,6 @@ optional = true
 version = "0.1"
 
 [features]
-file_backend = []
-hyper-backend = ["futures", "hyper", "tokio-core"]
 hyper_tls_backend = ["futures", "hyper", "hyper-tls", "native-tls", "tokio-core"]
 ore_v1 = []
 

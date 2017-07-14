@@ -23,3 +23,9 @@
 #![deny(missing_docs)]
 #![deny(warnings)]
 #![deny(missing_debug_implementations)]
+
+extern crate serde;
+extern crate serde_json;
+
+#[cfg(feature = "hyper_tls_backend")]
+pub mod request;
