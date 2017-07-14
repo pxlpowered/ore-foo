@@ -72,6 +72,9 @@ where
     D: Deserialize<'a>,
 {
     /// Request Json bytes from the `uri` source and convert into the provided `Deserialize` type.
+    /// This should ideally not overridden, as the default implementation handles it well.
+    /// The method provided as an utility method.
+    #[inline(always)]
     fn request(&'a self, threads: usize, uri: &str) -> Result<D> {
         serde_json::from_slice(RawRequest::request(self, threads, uri)?)
             .map_err(|why| Error::from(why))
