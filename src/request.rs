@@ -28,7 +28,6 @@ pub enum Error {
 }
 
 impl fmt::Display for Error {
-
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
             Error::Json(ref why) => fmt::Display::fmt(why, f),
@@ -37,7 +36,6 @@ impl fmt::Display for Error {
 }
 
 impl error::Error for Error {
-
     fn cause(&self) -> Option<&error::Error> {
         match *self {
             Error::Json(ref why) => Some(why),
@@ -53,7 +51,6 @@ impl error::Error for Error {
 
 #[doc(hidden)]
 impl From<serde_json::Error> for Error {
-
     fn from(error: serde_json::Error) -> Self {
         Error::Json(error)
     }
@@ -63,17 +60,17 @@ impl From<serde_json::Error> for Error {
 pub type Result<T> = result::Result<T, Error>;
 
 /// The base Request interface.
-pub trait RawRequest
-{
+pub trait RawRequest {
     /// Request raw bytes from the `uri` source.
     fn request(&self, threads: usize, uri: &str) -> Result<&[u8]>;
 }
 
 /// The Request interface for when the returned data is known to be Json bytes.
 pub trait JsonRequest<'a, D>: RawRequest
-    where D: Deserialize<'a>
+where
+    D: Deserialize<'a>,
 {
-    /// Request Json bytes and convert into `D` type.
+    /// Request Json bytes from the `uri` source and convert into the provided `Deserialize` type.
     fn request(&'a self, threads: usize, uri: &str) -> Result<D> {
         serde_json::from_slice(RawRequest::request(self, threads, uri)?)
             .map_err(|why| Error::from(why))
