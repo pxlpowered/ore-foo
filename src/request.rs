@@ -24,6 +24,7 @@ use std::result;
 #[derive(Debug)]
 pub enum Error {
     /// Invalid Json data.
+    /// This is a unique case only for `JsonRequest::request()`
     Json(serde_json::Error),
 }
 
